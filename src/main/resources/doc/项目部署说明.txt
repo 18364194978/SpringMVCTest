@@ -1,0 +1,2 @@
+1、需要修改dbconfig.properties数据的用户名密码
+2、修改log4j.properies日志写入地址
