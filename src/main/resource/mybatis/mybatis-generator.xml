@@ -23,7 +23,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.lanyus.springmvcmybatis.entity" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <javaModelGenerator targetPackage="com.lanyus.*.entity" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
             <property name="enableSubPackages" value="false"/>
@@ -37,7 +37,7 @@
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.lanyus.springmvcmybatis.dao" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.lanyus.*.dao" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
             <property name="enableSubPackages" value="false"/>

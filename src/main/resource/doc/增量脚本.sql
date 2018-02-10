@@ -27,6 +27,6 @@ CREATE TABLE `t_user` (
   `usertype` varchar(10) DEFAULT NULL COMMENT '人员类型：0.超级管理员 1.管理员 2.普通用户',
   `enabled` varchar(10) DEFAULT NULL COMMENT '启用状态 0.未启用 1.已启用',
   `phone` varchar(100) DEFAULT NULL COMMENT '联系电话',
-  `e-mail` varchar(100) DEFAULT NULL COMMENT '邮箱',
+  `e_mail` varchar(100) DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

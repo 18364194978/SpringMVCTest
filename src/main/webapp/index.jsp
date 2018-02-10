@@ -29,7 +29,7 @@
                 }
                 $.ajax({
                     dataType: "json",
-                    url: "${contextPath}/del",
+                    url: "${contextPath}//spring/user/getuserlist",
                     type: "post",
                     data: {
                         userName: userName,
