@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xie on 2018/2/9.
@@ -26,6 +28,16 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     * 检查用户名密码
+     * @param account
+     */
+    public User getuser(String account){
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("account",account);
+        User user = userMapper.getuser(map2);
+        return user;
+    }
     /**
      * 修改数据
      * @param user
