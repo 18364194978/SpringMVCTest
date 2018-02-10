@@ -12,10 +12,30 @@ import javax.annotation.Resource;
 
 public interface TestService {
 
+    /**
+     * 打印
+     * @param id
+     * @return
+     */
     public String print(int id);
 
+    /**
+     * 修改数据
+     * @param id
+     * @param content
+     */
     public void updateContent(int id, String content);
+
+    /**
+     * 删除数据
+     * @param id
+     */
     public void delete(int id);
 
+    /**
+     * 插入数据
+     * @param id
+     * @param content
+     */
     public void newContent(int id, String content);
 }

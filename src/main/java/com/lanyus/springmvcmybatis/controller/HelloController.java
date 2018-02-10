@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.Resource;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/spring")
 public class HelloController {
 	@Resource
 	TestService service;
@@ -18,14 +18,17 @@ public class HelloController {
 		model.addAttribute("message", service.print(2));
 		return "hello";
 	}
+
 	@RequestMapping("/success")
 	public void getlist(){
 		service.updateContent(2,"1");
 	}
+
 	@RequestMapping("/del")
 	public void del(){
 		service.delete(2);
 	}
+
 	@RequestMapping("/insert")
 	public void insert(){
 		service.newContent(7,"1");
