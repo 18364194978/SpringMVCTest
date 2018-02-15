@@ -29,24 +29,25 @@
                 }
                 $.ajax({
                     dataType: "json",
-                    url: "${contextPath}//spring/user/getuserlist",
+                    url: "${contextPath}/spring/user/checkuser",
                     type: "post",
                     data: {
                         userName: userName,
                         password: password
                     },
                     complete: function (xmlRequest) {
-                        var returninfo = eval("(" + xmlRequest.responseText + ")");
-                        if (returninfo.result == 1) {
-                            setCookie();
-                            document.location.href = "${contextPath}/dnw/user/home";
-                        } else if (returninfo.result == -1) {
-                            alert("用户名有误或已被禁用");
-                        } else if (returninfo.result == -2) {
-                            alert("密码错误");
-                        } else {
-                            alert("服务器错误");
-                        }
+                        console.log(xmlRequest, '1');
+                        <%--var returninfo = eval("(" + xmlRequest.responseText + ")");--%>
+                        <%--if (returninfo.result == 1) {--%>
+                        <%--setCookie();--%>
+                        <%--document.location.href = "${contextPath}/dnw/user/home";--%>
+                        <%--} else if (returninfo.result == -1) {--%>
+                        <%--alert("用户名有误或已被禁用");--%>
+                        <%--} else if (returninfo.result == -2) {--%>
+                        <%--alert("密码错误");--%>
+                        <%--} else {--%>
+                        <%--alert("服务器错误");--%>
+                        <%--}--%>
                     }
                 });
             }

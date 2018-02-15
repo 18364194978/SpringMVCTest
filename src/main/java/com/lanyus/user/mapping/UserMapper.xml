@@ -9,7 +9,7 @@
   <select id="getuser" resultMap="BaseResultMap" parameterType="Map" >
     select *
     from t_user
-    where account = #{account}
+    where account = #{account} AND enabled = '1'
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from test

@@ -39,7 +39,7 @@
             }
             $.ajax({
                 dataType: "json",
-                url: "${contextPath}/dnw/user/login",
+                url: "${contextPath}/spring/user/checkuser",
                 type: "post",
                 data: {
                     userName: $userName,
@@ -47,15 +47,16 @@
                 },
                 complete: function (xmlRequest) {
                     var returninfo = eval("(" + xmlRequest.responseText + ")");
+                    console.log(returninfo,'666')
                     if (returninfo.result == 1) {
                         setCookie();
-                        document.location.href = "${contextPath}/dnw/user/home";
+                        document.location.href = "${contextPath}/spring/user/home";
                     } else if (returninfo.result == -1) {
-                        $("#tip").html("用户名有误或已被禁用");
+                        alert("用户名有误或已被禁用");
                     } else if (returninfo.result == -2) {
-                        $("#tip").html("密码错误");
+                        alert("密码错误");
                     } else {
-                        $("#tip").html("服务器错误");
+                        alert("服务器错误");
                     }
                 }
             });

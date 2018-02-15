@@ -9,6 +9,7 @@
 
     <mvc:annotation-driven/>
     <mvc:resources location="/static/" mapping="/static/**"/>
+    <!--自动扫描-->
     <context:component-scan base-package="com.lanyus"/>
 
     <!-- 引入配置文件 -->
@@ -20,6 +21,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:com/lanyus/*/mapping/*.xml"/>
     </bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.lanyus.*.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
@@ -28,7 +30,7 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
-
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8"/>
@@ -39,11 +41,16 @@
         <property name="minIdle" value="0"/>
         <property name="defaultAutoCommit" value="false"/>
     </bean>
-
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
+        <property name="prefix"><value>/WEB-INF/page/</value></property>
+        <property name="suffix"><value>.jsp</value></property>
     </bean>
+
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="prefix" value="/WEB-INF/page/"/>-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
         <constructor-arg index="1" value="BATCH"/>
