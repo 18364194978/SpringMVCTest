@@ -6,18 +6,18 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>配网整定计算</title>
-		<%--<link rel="stylesheet" type="text/css" href="${contextPath}/static/ext/examples/portal/portal.css" />--%>
-		<%--<link rel="stylesheet" type="text/css" href="${contextPath}/static/ext/examples/shared/example.css" />--%>
-		<%--<link rel="stylesheet" type="text/css" href="${contextPath}/static/css/forestry-style.css"  />--%>
-	    <%--<script type="text/javascript" src="${contextPath}/static/ext/examples/shared/include-ext.js"></script>--%>
-	    <%--<script type="text/javascript" src="${contextPath}/static/ext/locale/ext-lang-zh_CN.js"></script>--%>
-	    <%--<script type="text/javascript" src="${contextPath}/static/ext/examples/shared/options-toolbar.js"></script>--%>
-	    <%--<script type="text/javascript" src="${contextPath}/static/ext/examples/shared/examples.js"></script>--%>
+		<title>MVC主页</title>
+		<link rel="stylesheet" type="text/css" href="${contextPath}/static/ext/examples/portal/portal.css" />
+		<link rel="stylesheet" type="text/css" href="${contextPath}/static/ext/examples/shared/example.css" />
+		<link rel="stylesheet" type="text/css" href="${contextPath}/static/css/forestry-style.css"  />
+	    <script type="text/javascript" src="${contextPath}/static/ext/examples/shared/include-ext.js"></script>
+	    <script type="text/javascript" src="${contextPath}/static/ext/locale/ext-lang-zh_CN.js"></script>
+	    <script type="text/javascript" src="${contextPath}/static/ext/examples/shared/options-toolbar.js"></script>
+	    <script type="text/javascript" src="${contextPath}/static/ext/examples/shared/examples.js"></script>
 	    <script type="text/javascript">
 			console.log('888888888')
 	  		<%--var userName = '${SESSION_SYS_USER.userName}';--%>
-	  		<%--&lt;%&ndash;var globalRoleId = '${SESSION_SYS_USER.role}';&ndash;%&gt;--%>
+	  		<%--var globalRoleId = '${SESSION_SYS_USER.role}';--%>
             <%--var userId = '${SESSION_SYS_USER.user_id}';--%>
             <%--var userName = '${SESSION_SYS_USER.user_account}';--%>
             <%--var user_name = '${SESSION_SYS_USER.user_name}';--%>
@@ -26,13 +26,12 @@
             <%--var deptId = '${SESSION_SYS_USER.dept_id}';--%>
             var role_ids = '${SESSION_ROLE_IDS}';
             console.log(role_ids,'1111')
-			<%--&lt;%&ndash;var lastLoginTime = '${SESSION_SYS_USER.lastLoginTime}';&ndash;%&gt;--%>
-	    	<%--var appBaseUri = '${contextPath}';--%>
-	    	<%--var appName = '配网整定计算';--%>
-	        <%--Ext.Loader.setPath('Ext.app', '${contextPath}/static/ext/examples/portal/classes');--%>
-	        <%--Ext.Loader.setPath('Ext.ux', '${contextPath}/static/ext/examples/ux');--%>
-	        <%--Ext.Loader.setPath('Forestry.app', '${contextPath}/static/ext/examples/portal');--%>
-	        <%--&lt;%&ndash;Ext.Loader.setPath('Forestry.app', '${contextPath}/static/ext/examples/portal');&ndash;%&gt;--%>
+			<%--var lastLoginTime = '${SESSION_SYS_USER.lastLoginTime}';--%>
+	    	var appBaseUri = '${contextPath}';
+	    	var appName = '配网整定计算';
+	        Ext.Loader.setPath('Ext.app', '${contextPath}/static/ext/examples/portal/classes');
+	        Ext.Loader.setPath('Ext.ux', '${contextPath}/static/ext/examples/ux');
+	        Ext.Loader.setPath('Forestry.app', '${contextPath}/static/ext/examples/portal');
 	    </script>
 	    <%--<script type="text/javascript" src="${contextPath}/static/ext/examples/portal/portal.js"></script>--%>
 		<%--<script type="text/javascript" src="${contextPath}/static/ext/examples/portal/UUID.js"></script>--%>
