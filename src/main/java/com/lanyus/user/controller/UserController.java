@@ -29,7 +29,7 @@ public class UserController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		if (user_info == null) { // 用户名有误或已被禁用
 			result.put("success", true);
-			result.put("result", 1);
+			result.put("result", -1);
 			return result;
 		}
 //		if (!user_info.getPassword().equals(MD5.crypt(password))) { // 密码错误
@@ -44,31 +44,10 @@ public class UserController {
 		result.put("result", 1);
 		return result;
 	}
-//	@RequestMapping("/home")
-//	public void home(HttpServletRequest request, HttpServletResponse response) throws IOException{
-//		if (request.getSession().getAttribute(Constant.SESSION_SYS_USER) == null) {
-////			logout(request,response);
-////			return "";
-//		} else {
-//			Object id  = request.getSession().getAttribute(Constant.SESSION_SYS_USER);
-////			return "main";
-//			String contextPath = request.getContextPath();
-//			response.sendRedirect(contextPath + "/index.jsp");
-//		}
-//	}
-	@RequestMapping("/home")
-	public String home(HttpServletRequest request, HttpServletResponse response) throws IOException{
-			return "main";
-
+	@RequestMapping("home")
+	public String hot(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		return "back/main";
 	}
 
-	@RequestMapping("/deleteuser")
-	public void delleteUser(){
-
-	}
-
-	@RequestMapping("/insertuser")
-	public void insertUser(){
-
-	}
 }
