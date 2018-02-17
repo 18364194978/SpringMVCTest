@@ -33,7 +33,7 @@
 	        Ext.Loader.setPath('Ext.ux', '${contextPath}/static/ext/examples/ux');
 	        Ext.Loader.setPath('Forestry.app', '${contextPath}/static/ext/examples/portal');
 	    </script>
-	    <%--<script type="text/javascript" src="${contextPath}/static/ext/examples/portal/portal.js"></script>--%>
+	    <script type="text/javascript" src="${contextPath}/static/ext/examples/portal/portal.js"></script>
 		<%--<script type="text/javascript" src="${contextPath}/static/ext/examples/portal/UUID.js"></script>--%>
 		<%--<script type="text/javascript" src="${contextPath}/static/ext/examples/portal/commonField.js"></script>--%>
 	    <%--<script type="text/javascript">--%>

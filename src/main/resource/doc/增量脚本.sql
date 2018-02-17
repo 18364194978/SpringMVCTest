@@ -30,3 +30,38 @@ CREATE TABLE `t_user` (
   `e_mail` varchar(100) DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+  添加人：xie
+  添加时间：2018-02-17
+  说明：添加菜单列表
+*/
+DROP TABLE IF EXISTS `t_menu`;
+CREATE TABLE `t_menu` (
+  `menu_id` VARCHAR (20) NOT NULL COMMENT '菜单编号',
+  `buttons` varchar(100) DEFAULT NULL COMMENT '按钮',
+  `checked` varchar(10) DEFAULT NULL COMMENT '是否选中：0.未选中 1.已选中',
+  `expanded` varchar(100) DEFAULT NULL COMMENT '是否展开：0.不展开 1.展开',
+  `icon_cls` varchar(10) DEFAULT NULL COMMENT '图标',
+  `leaf` varchar(10) DEFAULT NULL COMMENT '是否叶子节点：0.是 1.否',
+  `menu_code` varchar(100) DEFAULT NULL COMMENT '菜单编号',
+  `menu_name` varchar(100) DEFAULT NULL COMMENT '菜单名称',
+  `parent_id` varchar(10) DEFAULT NULL COMMENT '父节点id',
+  `sort_order` varchar(100) DEFAULT NULL COMMENT '排序编号',
+  `url` varchar(100) DEFAULT NULL COMMENT '地址',
+  `is_select` varchar(100) DEFAULT NULL COMMENT '',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+  添加人：xie
+  添加时间：2018-02-17
+  说明：添加权限关联菜单列表
+*/
+DROP TABLE IF EXISTS `t_user_menu`;
+CREATE TABLE `t_user_menu` (
+  `user_menu_id` VARCHAR (100) NOT NULL COMMENT '32位GUID',
+  `userid` varchar(100) DEFAULT NULL COMMENT '角色id',
+  `menu_id` varchar(100) DEFAULT NULL COMMENT '菜单id(t_menu表)',
+  PRIMARY KEY (`user_menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

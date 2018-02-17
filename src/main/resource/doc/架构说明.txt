@@ -1,7 +1,13 @@
 创建时间：2018-02-16
+
 创建人：xie
+
 架构说明：
 框架为springMVC,采用spring4.1.2版本，后台java采用1.8（1.7也暂未发现严重缺陷），前端extjs版本使用5.1，tomcat采用7.0.79，
 使用apache-maven 3.5.0管理jar包，数据库为mysql数据库
 文件portal.js为前端主界面文件
-注意：采用其他版本的spring的jar包可能发生界面跳转错误
+
+注意：
+1、采用其他版本的spring的jar包可能发生界面跳转错误
+2、新建包或java文件时需要严格按照包com.lanyus内的文件格式添加（controller、dao、entity、mapping、service），
+否则当配置文件自动扫描包与.xml文件时可能会扫描不到导致报错
