@@ -1,5 +1,6 @@
 package com.lanyus.authority.controller;
 
+import core.CommenBaseController;
 import com.lanyus.authority.service.AuthorityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/spring/sys/authority")
-public class AuthorityController {
+public class AuthorityController extends CommenBaseController{
 
     @Resource
     private AuthorityService authorityService;
@@ -24,15 +25,15 @@ public class AuthorityController {
     public void getAuthority(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String globalRoleId = request.getParameter("globalRoleId");
         String node = request.getParameter("node");
-        if (!"root".equals(node)) {
-            return;
-        }
+//        if (!"root".equals(node)) {
+//            return;
+//        }
         List resultList = new ArrayList();
 //        if (Tools.isNotEmpty(globalRoleId)) {
             String[] role_ids = globalRoleId.split(",");
             resultList = authorityService.getMenuList(role_ids);
-            String a= "";
 //        }
+        writeJSON(response, resultList);
     }
 
 }

@@ -1,13 +1,17 @@
-创建时间：2018-02-16
+创建时间：2018-02-10
 
 创建人：xie
 
 架构说明：
-框架为springMVC,采用spring4.1.2版本，后台java采用1.8（1.7也暂未发现严重缺陷），前端extjs版本使用5.1，tomcat采用7.0.79，
-使用apache-maven 3.5.0管理jar包，数据库为mysql数据库
-文件portal.js为前端主界面文件
-
+一、主框架
+    框架为springMVC,采用spring4.1.2版本，后台java采用1.8（1.7也暂未发现严重缺陷），前端extjs版本使用5.1，tomcat采用7.0.79，
+使用apache-maven 3.5.0管理jar包，数据库为mysql数据库,该模型采用使用单个jsp，点击菜单时只在该jsp内轮番切换（详见globalObject.openTab方法），
+与我上一个制作的SSH模型不同,struct采用定义多个jsp界面，实现多个可关闭菜单(tab页格式)的展示
+二、文件结构
+1、文件portal.js为前端主界面js文件,main.jsp为主jsp界面（内部有动态加载ext-all.js以及其他必须的css文件等）
+2、pom内ext-sina为自定义包（包含返回前端数据所用的接口writeJSON()及路径反斜杠的变量等），联网下载搜索不到会爆红，
+所以将其写入到CommenBaseController类内，并将其作为一个公共类，定义其他controller类时需要继承(extends)该类
 注意：
-1、采用其他版本的spring的jar包可能发生界面跳转错误
+1、采用其他低版本的spring的jar包可能发生界面跳转错误
 2、新建包或java文件时需要严格按照包com.lanyus内的文件格式添加（controller、dao、entity、mapping、service），
 否则当配置文件自动扫描包与.xml文件时可能会扫描不到导致报错

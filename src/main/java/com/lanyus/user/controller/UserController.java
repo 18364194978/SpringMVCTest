@@ -2,7 +2,7 @@ package com.lanyus.user.controller;
 
 import com.lanyus.user.entity.User;
 import com.lanyus.user.service.UserService;
-import com.lanyus.core.Constant;
+import core.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

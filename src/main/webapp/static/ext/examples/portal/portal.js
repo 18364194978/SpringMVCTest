@@ -43,7 +43,7 @@ Ext.onReady(function() {
     // });
 
     var menuTreeStore = Ext.create('Ext.data.TreeStore', {
-        autoLoad : true,
+        // autoLoad : true,
         proxy : {
             type : 'ajax',
             url : appBaseUri + '/spring/sys/authority/getAuthority?globalRoleId=' + role_ids,
@@ -53,6 +53,12 @@ Ext.onReady(function() {
             }
         }
     });
+    // console.log(menuTreeStore,0)
+    menuTreeStore.load({
+        callback:function (records,options,success) {
+            console.log(records,options,success)
+        }
+    })
 
     var treeFilterField = Ext.create('Ext.form.field.Trigger', {
         width : '100%',
