@@ -90,6 +90,18 @@
             <version>2.4</version>
             <classifier>jdk15</classifier>
         </dependency>
+        <!-- 自定义组件 包含writeJson,分隔符等接口参数，此包网上搜索不到会爆红，所以直接写一个CommonBaseController代替-->
+        <!--<dependency>-->
+            <!--<groupId>com.pi.roof.opensource</groupId>-->
+            <!--<artifactId>ext-sina</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; 公共日志组件 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.pi.roof.opensource</groupId>-->
+            <!--<artifactId>pi-logger</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
