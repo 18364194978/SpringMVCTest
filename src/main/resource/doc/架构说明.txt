@@ -11,6 +11,7 @@
 1、文件portal.js为前端主界面js文件,main.jsp为主jsp界面（内部有动态加载ext-all.js以及其他必须的css文件等）
 2、pom内ext-sina为自定义包（包含返回前端数据所用的接口writeJSON()及路径反斜杠的变量等），联网下载搜索不到会爆红，
 所以将其写入到CommenBaseController类内，并将其作为一个公共类，定义其他controller类时需要继承(extends)该类
+3、Tools类为基本的工具类包含判断是否为空、日期格式转换等
 注意：
 1、采用其他低版本的spring的jar包可能发生界面跳转错误
 2、新建包或java文件时需要严格按照包com.lanyus内的文件格式添加（controller、dao、entity、mapping、service），
