@@ -4,12 +4,14 @@
     <resultMap id="BaseResultMap" type="com.lanyus.authority.entity.Authority" ></resultMap>
     <resultMap id="Map" type="java.util.Map" ></resultMap>
     <select id="getMenuList" resultMap="BaseResultMap" parameterType="Map" >
-        SELECT DISTINCT b.* FROM t_user_menu a,t_menu b
-        WHERE a.menu_id = b.menu_id AND a.userid IN
+        SELECT DISTINCT b.* FROM t_role_menu a,t_menu b
+        WHERE a.menu_id = b.menu_id AND a.role_id IN
+        (SELECT role_id FROM t_user_role c WHERE c.user_id IN
         <foreach item="item" index="index" collection="userid"
-                 open="(" separator="," close=")">
+        open="(" separator="," close=")">
             #{item}
         </foreach>
+        )
         ORDER BY b.sort_order
     </select>
 </mapper>

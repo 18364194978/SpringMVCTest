@@ -58,10 +58,92 @@ CREATE TABLE `t_menu` (
   添加时间：2018-02-17
   说明：添加权限关联菜单列表
 */
-DROP TABLE IF EXISTS `t_user_menu`;
-CREATE TABLE `t_user_menu` (
-  `user_menu_id` VARCHAR (100) NOT NULL COMMENT '32位GUID',
-  `userid` varchar(100) DEFAULT NULL COMMENT '角色id',
+DROP TABLE IF EXISTS `t_role_menu`;
+CREATE TABLE `t_role_menu` (
+  `role_menu_id` VARCHAR (100) NOT NULL COMMENT '32位GUID',
+  `role_id` varchar(100) DEFAULT NULL COMMENT '角色id',
   `menu_id` varchar(100) DEFAULT NULL COMMENT '菜单id(t_menu表)',
-  PRIMARY KEY (`user_menu_id`)
+  PRIMARY KEY (`role_menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*
+  添加人：xie
+  添加时间：2018-02-24
+  说明：添加人员部门列表
+*/
+DROP TABLE IF EXISTS `t_dept`;
+CREATE TABLE `t_dept` (
+  `dept_id` varchar(100) NOT NULL COMMENT '主键',
+  `dept_name` varchar(100) DEFAULT NULL COMMENT '部门名称',
+  `company_id` varchar(100) DEFAULT NULL COMMENT '所属单位id',
+  `company_name` varchar(100) DEFAULT NULL COMMENT '所属单位名称',
+  `region_id` varchar(100) DEFAULT NULL COMMENT '所属地区id',
+  `region_name` varchar(100) DEFAULT NULL COMMENT '所属地区名称',
+  PRIMARY KEY (`dept_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
+/*
+  添加人：xie
+  添加时间：2018-02-24
+  说明：添加单位列表
+*/
+DROP TABLE IF EXISTS `t_company`;
+CREATE TABLE `t_company` (
+  `company_id` varchar(100) NOT NULL COMMENT '主键',
+  `company_name` varchar(100) DEFAULT NULL COMMENT '单位名称',
+  `region_id` varchar(100) DEFAULT NULL COMMENT '所属地区id',
+  `region_name` varchar(100) DEFAULT NULL COMMENT '所属地区名称',
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='单位表';
+
+/*
+  添加人：xie
+  添加时间：2018-02-24
+  说明：添加地区列表
+*/
+DROP TABLE IF EXISTS `t_region`;
+CREATE TABLE `t_region` (
+  `region_id` varchar(100) NOT NULL COMMENT '所属地区id',
+  `region_name` varchar(100) DEFAULT NULL COMMENT '所属地区名称',
+  PRIMARY KEY (`region_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
+
+/*
+添加人：xie
+添加时间：2018-02-24
+说明：人员表添加所属部门、所属单位、所属地区列
+ */
+Alter table t_user Drop column dept_id;
+Alter table t_user Add dept_id varchar(100) DEFAULT NULL COMMENT '单位id';
+Alter table t_user Drop column company_id;
+Alter table t_user Add company_id varchar(100) DEFAULT NULL COMMENT '部门id';
+Alter table t_user Drop column region_id;
+Alter table t_user Add region_id varchar(100) DEFAULT NULL COMMENT '地区id';
+/*
+添加人：xie
+添加时间：2018-02-24
+说明：删除无用列
+ */
+Alter table t_user Drop column usertype;
+/*
+  添加人：xie
+  添加时间：2018-02-24
+  说明：添加角色人员关联表
+*/
+DROP TABLE IF EXISTS `t_user_role`;
+CREATE TABLE `t_user_role` (
+  `user_role_id` varchar(100) NOT NULL COMMENT '主键',
+  `user_id` varchar(100) DEFAULT NULL COMMENT '用户id',
+  `role_id` varchar(100) DEFAULT NULL COMMENT '角色id',
+  PRIMARY KEY (`user_role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色人员关联表';
+/*
+  添加人：xie
+  添加时间：2018-02-24
+  说明：添加角色表
+*/
+DROP TABLE IF EXISTS `t_role`;
+CREATE TABLE `t_role` (
+  `role_id` varchar(100) NOT NULL COMMENT '主键',
+  `role_name` varchar(100) DEFAULT NULL COMMENT '用户名称',
+  `company_id` varchar(100) DEFAULT NULL COMMENT '公司id',
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='人员表';

@@ -9,7 +9,6 @@ public class User {
     private String sex;
     private String dept_count;
     private String remarks;
-    private String usertype;
     private String enabled;
     private String phone;
     private String e_mail;
@@ -55,12 +54,6 @@ public class User {
     }
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-    public String getUsertype() {
-        return usertype;
-    }
-    public void setUsertype(String usertype) {
-        this.usertype= usertype;
     }
     public String getEnabled() {
         return enabled;

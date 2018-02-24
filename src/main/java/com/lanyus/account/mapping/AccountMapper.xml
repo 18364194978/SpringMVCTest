@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanyus.account.dao.AccountMapper" >
+    <resultMap id="RegionMap" type="com.lanyus.account.entity.Region" ></resultMap>
+    <resultMap id="Map" type="java.util.Map" ></resultMap>
+    <select id="getRegionList" resultMap="RegionMap" parameterType="Map" >
+        SELECT * FROM t_region
+        <where>
+            1=1
+            <if test="region_name!=null and region_name!=''">
+                AND region_name like CONCAT('%',#{region_name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
