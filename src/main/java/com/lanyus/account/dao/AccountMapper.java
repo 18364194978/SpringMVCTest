@@ -15,4 +15,10 @@ public interface AccountMapper {
      * @return
      */
     List<Region> getRegionList(Map<String,Object> param);
+    /**
+     * 根据获取地区数量
+     * @param param
+     * @return
+     */
+    int getRegionCount(Map<String,Object> param);
 }

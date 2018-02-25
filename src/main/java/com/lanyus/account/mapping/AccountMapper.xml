@@ -11,5 +11,15 @@
                 AND region_name like CONCAT('%',#{region_name},'%')
             </if>
         </where>
+        ORDER  BY t_region.region_id DESC limit #{start},#{limit}
+    </select>
+    <select id="getRegionCount" resultMap="RegionMap" parameterType="Map" >
+        SELECT count(*) FROM t_region
+        <where>
+            1=1
+            <if test="region_name!=null and region_name!=''">
+                AND region_name like CONCAT('%',#{region_name},'%')
+            </if>
+        </where>
     </select>
 </mapper>

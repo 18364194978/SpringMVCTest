@@ -75,9 +75,7 @@ CREATE TABLE `t_dept` (
   `dept_id` varchar(100) NOT NULL COMMENT '主键',
   `dept_name` varchar(100) DEFAULT NULL COMMENT '部门名称',
   `company_id` varchar(100) DEFAULT NULL COMMENT '所属单位id',
-  `company_name` varchar(100) DEFAULT NULL COMMENT '所属单位名称',
   `region_id` varchar(100) DEFAULT NULL COMMENT '所属地区id',
-  `region_name` varchar(100) DEFAULT NULL COMMENT '所属地区名称',
   PRIMARY KEY (`dept_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
 /*
@@ -90,7 +88,6 @@ CREATE TABLE `t_company` (
   `company_id` varchar(100) NOT NULL COMMENT '主键',
   `company_name` varchar(100) DEFAULT NULL COMMENT '单位名称',
   `region_id` varchar(100) DEFAULT NULL COMMENT '所属地区id',
-  `region_name` varchar(100) DEFAULT NULL COMMENT '所属地区名称',
   PRIMARY KEY (`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='单位表';
 
@@ -104,7 +101,7 @@ CREATE TABLE `t_region` (
   `region_id` varchar(100) NOT NULL COMMENT '所属地区id',
   `region_name` varchar(100) DEFAULT NULL COMMENT '所属地区名称',
   PRIMARY KEY (`region_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地区表';
 
 /*
 添加人：xie
@@ -147,3 +144,20 @@ CREATE TABLE `t_role` (
   `company_id` varchar(100) DEFAULT NULL COMMENT '公司id',
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='人员表';
+/*
+  添加人：xie
+  添加时间：2018-02-25
+  说明：插入初始用户表数据
+*/
+INSERT INTO t_region (region_id, region_name) VALUES ('01', '山东');
+INSERT INTO t_company (company_id, company_name,region_id) VALUES ('011', '360','01');
+INSERT INTO t_dept (dept_id, dept_name,company_id,region_id) VALUES ('0111', '检测中心','011','01');
+INSERT INTO t_role (role_id, role_name,company_id) VALUES ('01111', '管理者','011');
+INSERT INTO t_user (userid, username,account,password,sex,dept_count,remarks,enabled,phone,e_mail,dept_id,company_id,region_id)
+VALUES ('011111','管理员','admin','1','1','null','null','1','1000','null','0111','011','01');
+INSERT INTO t_user_role (user_role_id, user_id,role_id) VALUES ('112', '011111','01111');
+INSERT INTO t_role_menu (role_menu_id, role_id,menu_id) VALUES ('211', '01111','10');
+INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,sort_order)
+ VALUES ('10','false','false','账户管理','1000');
+INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,parent_id,sort_order,url)
+VALUES ('101','false','true','地区管理','10','1001','umanage.accountManage');

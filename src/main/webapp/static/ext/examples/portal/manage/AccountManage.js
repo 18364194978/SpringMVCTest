@@ -240,7 +240,7 @@ Ext.onReady(function () {
     });
 
     //修改的按钮函数
-    Ext.roof.dataConfiguration.umanage.DeptManage.dept_edit = function () {
+    Ext.spring.dataConfiguration.umanage.accountManage.dept_edit = function () {
         var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
         //以window的名字.DeptManagementWindow
         var win = new App.DeptManagementWindow({
@@ -256,7 +256,7 @@ Ext.onReady(function () {
     }
 
     //删除的按钮函数
-    Ext.roof.dataConfiguration.umanage.DeptManage.dept_del = function () {
+    Ext.spring.dataConfiguration.umanage.accountManage.dept_del = function () {
         var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
         globalObject.confirmTip('请确认，是否执行删除操作？', function(btn) {
             if (btn == 'yes') {
