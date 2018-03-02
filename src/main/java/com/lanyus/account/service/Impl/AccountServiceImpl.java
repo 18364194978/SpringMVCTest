@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by Administrator on 2018/2/25 0025.
  */
 @Service
-public class AccountServiceImpl extends  AccountService{
+public class AccountServiceImpl implements  AccountService{
 
     @Resource AccountMapper accountMapper;
 

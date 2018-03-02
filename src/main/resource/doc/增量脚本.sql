@@ -157,6 +157,7 @@ INSERT INTO t_user (userid, username,account,password,sex,dept_count,remarks,ena
 VALUES ('011111','管理员','admin','1','1','null','null','1','1000','null','0111','011','01');
 INSERT INTO t_user_role (user_role_id, user_id,role_id) VALUES ('112', '011111','01111');
 INSERT INTO t_role_menu (role_menu_id, role_id,menu_id) VALUES ('211', '01111','10');
+INSERT INTO t_role_menu (role_menu_id, role_id,menu_id) VALUES ('212', '01111','101');
 INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,sort_order)
  VALUES ('10','false','false','账户管理','1000');
 INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,parent_id,sort_order,url)

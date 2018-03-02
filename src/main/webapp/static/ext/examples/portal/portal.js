@@ -18,29 +18,71 @@ Ext.onReady(function() {
     // History浏览器前进后退功能
     Ext.History.init();
     var tokenDelimiter = ':';
-    // var mainPortal = Ext.create('Forestry.app.process.MyTask', {暂时屏蔽
+    Ext.define('Forestry.app.process.MyTask11', {
+        extend: 'Ext.panel.Panel',
+        toolbar:null,
+        initComponent:function () {
+            var me = this;
+            var items =[{
+                xtype: 'button',
+                id: 'button_222',
+                hidden: true,
+                width: 150,
+                height: 40,
+                allowDepress: true,
+                enableToggle: true,
+                toggleGroup: 'btnGroup',
+                text: '参数复核',
+                iconCls: 'icon-excel',
+                width: 120,
+                handler: function (btn, eventObj) {}
+            }];
+            me.toolbar = Ext.create('Ext.toolbar.Toolbar', {
+                region: 'north',
+                items: items
+            });
+            var center_grid_panel = Ext.create('Ext.panel.Panel', {
+                region: 'center',
+                layout: 'fit',
+                items: []
+            });
+            Ext.apply(this, {
+                layout: 'border',
+                items: [center_grid_panel]
+            });
+            this.callParent(arguments);
+        }
+    });
+    var mainPortal = Ext.create('Forestry.app.process.MyTask11', {
+        id : 'tab44',
+        title : "待处理消息",
+        layout : 'fit',
+        autoScroll : true
+    });
+    // var mainPortal = Ext.create('Forestry.app.process.MyTask', {
     //     id : 'tab44',
     //     title : "待处理消息",
     //     layout : 'fit',
     //     autoScroll : true
     // });
 
-    // mainTab = Ext.create('Ext.TabPanel', {暂时屏蔽
-    //     region : 'center',
-    //     margins : '2 0 0 0',
-    //     deferredRender : false,
-    //     activeTab : 0,
-    //     plugins : Ext.create('Ext.ux.TabCloseMenu', {
-    //         closeTabText : '关闭面板',
-    //         closeOthersTabsText : '关闭其他',
-    //         closeAllTabsText : '关闭所有'
-    //     }),
-    //     // items : [ mainPortal ],暂时屏蔽
-    //     listeners : {
-    //         tabchange : onTabChange,
-    //         afterrender : onAfterRender
-    //     }
-    // });
+    mainTab = Ext.create('Ext.TabPanel', {
+        region : 'center',
+        margins : '2 0 0 0',
+        deferredRender : false,
+        activeTab : 0,
+        plugins : Ext.create('Ext.ux.TabCloseMenu', {
+            closeTabText : '关闭面板',
+            closeOthersTabsText : '关闭其他',
+            closeAllTabsText : '关闭所有'
+        }),
+        // items:[],
+        items : [mainPortal],
+        listeners : {
+            tabchange : onTabChange,
+            afterrender : onAfterRender
+        }
+    });
 
     var menuTreeStore = Ext.create('Ext.data.TreeStore', {
         // autoLoad : true,
@@ -322,7 +364,7 @@ Ext.onReady(function() {
                 } ]
             } ]
         }, treePanel,
-            // mainTab,暂时屏蔽
+            mainTab,
             {
             region : 'south',
             border : false,
@@ -382,7 +424,6 @@ var globalObject = new Object();
 
 // 打开tab
 globalObject.openTab = function(tabId, tabTitle, tab, config) {
-    // console.log(config);
     var _tab = mainTab.getComponent('tab' + tabId);
     if (!_tab) {
         mainTab.setLoading('Loading...');
