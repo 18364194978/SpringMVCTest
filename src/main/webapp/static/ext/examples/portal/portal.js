@@ -59,12 +59,6 @@ Ext.onReady(function() {
         layout : 'fit',
         autoScroll : true
     });
-    // var mainPortal = Ext.create('Forestry.app.process.MyTask', {
-    //     id : 'tab44',
-    //     title : "待处理消息",
-    //     layout : 'fit',
-    //     autoScroll : true
-    // });
 
     mainTab = Ext.create('Ext.TabPanel', {
         region : 'center',
@@ -76,7 +70,6 @@ Ext.onReady(function() {
             closeOthersTabsText : '关闭其他',
             closeAllTabsText : '关闭所有'
         }),
-        // items:[],
         items : [mainPortal],
         listeners : {
             tabchange : onTabChange,
@@ -95,7 +88,6 @@ Ext.onReady(function() {
             }
         }
     });
-    // console.log(menuTreeStore,0)
     menuTreeStore.load({
         callback:function (records,options,success) {
             console.log(records,options,success)
@@ -434,7 +426,8 @@ globalObject.openTab = function(tabId, tabTitle, tab, config) {
             layout : 'fit',
             autoScroll : true,
             border : false,
-            items : typeof (tab) == 'string' ? Ext.create('Forestry.app.' + tab, config) : tab
+            // items : typeof (tab) == 'string' ? Ext.create('Ext.spring.' + tab, config) : tab
+            items : typeof (tab) == 'string' ? Ext.create('Forestry.app.manage.AccountManage', config) : tab
         });
         mainTab.removeAll();//2017-09-11修改为tab标签单开只显示一个
         mainTab.add(_tab);

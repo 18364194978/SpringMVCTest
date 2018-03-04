@@ -16,3 +16,5 @@
 1、采用其他低版本的spring的jar包可能发生界面跳转错误
 2、新建包或java文件时需要严格按照包com.lanyus内的文件格式添加（controller、dao、entity、mapping、service），
 否则当配置文件自动扫描包与.xml文件时可能会扫描不到导致报错
+3、如果需要新定义组件时（如：Ext.define('Forestry.app.manage.AccountManage',{} ）需定义名称为AccountManage的js文件，放在manage文件夹下，若定义新的组件名开头不为
+'Forestry.app',则需要在main.jsp中Ext.Loader.setPath定义加载才可。

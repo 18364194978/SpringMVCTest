@@ -1,4 +1,4 @@
-Ext.namespace('Ext.spring.dataConfiguration.umanege.accountManage');//自定一个命名空间，防止同名方法发生冲突
+Ext.namespace('Ext.spring.dataConfiguration.manage.AccountManage');//自定一个命名空间，防止同名方法发生冲突
 Ext.onReady(function () {
     Ext.tip.QuickTipManager.init();
 
@@ -122,164 +122,83 @@ Ext.onReady(function () {
             App.DeptManagementWindow.superclass.constructor.call(this, config);
         }
     });
-    Ext.define('Forestry.app.umanage.accountManage', {
-        extend : 'Ext.grid.Panel',
-        region : 'center',
-        initComponent : function() {
+    Ext.define('Forestry.app.manage.AccountManage', {
+        extend: 'Ext.panel.Panel',
+        toolbar:null,
+        initComponent:function () {
             var me = this;
-            Ext.define('ModelList', {
-                extend : 'Ext.data.Model',
-                idProperty : 'region_id',
-                fields : [ {
-                    name : 'region_id'
-                }, 'region_name']
-            });
-            var store = Ext.create('Ext.data.Store', {
-                model : 'ModelList',
-                remoteSort : true,
-                pageSize : globalPageSize,
-                proxy : {
-                    type : 'ajax',
-                    url : appBaseUri + '/dnw/account/getRegionList',
-                    extraParams : me.extraParams || null,
-                    reader : {
-                        type : 'json',
-                        root : 'data',
-                        totalProperty : 'totalRecord',
-                        successProperty : "success"
-                    }
-                },
-                sorters : [ {
-                    property : 'region_id',
-                    direction : 'DESC'
-                }]
-            });
-            var rownum = new Ext.grid.RowNumberer({
-                header : '序号',
-                flex: 0.05,
-                align:'center'
-            });
-            var columns = [rownum, {
-                text : "ID",
-                xtype : "hidden",
-                dataIndex : 'region_id',
-                flex : 0.05
-            },{
-                text : "地区名称",
-                align:'center',
-                dataIndex : 'region_name',
-                flex : 0.6
-            }, {text : '操作项',dataIndex : 'oper',sortable : false,flex: 0.20,
-                renderer : function(value, cellmeta, record, rowIndex, columnIndex, store){
-                    return "<span class='tip_info' onclick='Ext.roof.dataConfiguration.umanage.DeptManage.dept_edit()'>修改</span>"
-                        + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "<span class='tip_danger' " +
-                        "onclick='Ext.roof.dataConfiguration.umanage.DeptManage.dept_del()'>删除</span>";
-                }
+            var items =[{
+                xtype: 'button',
+                id: 'button_2223',
+                hidden: true,
+                width: 150,
+                height: 40,
+                allowDepress: true,
+                enableToggle: true,
+                toggleGroup: 'btnGroup',
+                text: '参数复核',
+                iconCls: 'icon-excel',
+                width: 120,
+                handler: function (btn, eventObj) {}
             }];
-            var ttoolbar = Ext.create('Ext.toolbar.Toolbar', {
-                items: [{
-                    xtype : 'textfield',
-                    id : 'dept_name',
-                    name : 'dept_name',
-                    hideLabel : true,
-                    fieldLabel : '部门名称',
-                    maxLength : 100,
-                    emptyText : '请输入部门'
-                }, {
-                    xtype : 'button',
-                    text : '搜索',
-                    iconCls : 'icon-search',
-                    width : '15%',
-                    maxWidth : 60,
-                    handler : function(btn, eventObj) {
-                        var searchParams = {
-                            dept_name : Ext.getCmp('dept_name').getValue()
-                        };
-                        Ext.apply(store.proxy.extraParams, searchParams);
-                        store.reload();
-                    }
-                }, '->',
-                    {
-                        xtype: 'button',
-                        text: '新增部门',
-                        iconCls: 'icon-add',
-                        width : '25%',
-                        maxWidth : 100,
-                        handler: function (btn, eventObj) {
-                            var win = new App.DeptManagementWindow({
-                                hidden : true
-                            });
-                            var form = win.down('form').getForm();
-                            form.findField('cmd').setValue('new');
-                            win.show();
-                            if (companyId!='00') {
-                                form.findField('company_id').setValue(companyId);
-                                form.findField('company_name').setValue(companyName);
-                                form.findField('company_name').disable(true);
-                            }
-                        }
-                    }
-
-                ]
+            me.toolbar = Ext.create('Ext.toolbar.Toolbar', {
+                region: 'north',
+                items: items
             });
-
+            var center_grid_panel = Ext.create('Ext.panel.Panel', {
+                region: 'center',
+                layout: 'fit',
+                items: []
+            });
             Ext.apply(this, {
-                id : 'dept_grid',
-                store : store,
-                columns : columns,
-                tbar : ttoolbar,
-                //selModel : Ext.create('Ext.selection.CheckboxModel'),
-                bbar : Ext.create('Ext.PagingToolbar', {
-                    store : store,
-                    displayInfo : true
-                })
+                layout: 'border',
+                items: [center_grid_panel]
             });
-            store.loadPage(1);
             this.callParent(arguments);
         }
     });
 
     //修改的按钮函数
-    Ext.spring.dataConfiguration.umanage.accountManage.dept_edit = function () {
-        var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
-        //以window的名字.DeptManagementWindow
-        var win = new App.DeptManagementWindow({
-            hidden : true
-        });
-        var form = win.down('form').getForm();
-        form.loadRecord(record);
-        form.findField("cmd").setValue("edit");
-        if (companyId!='00') {
-            form.findField('company_name').disable(true);
-        }
-        win.show();
-    }
-
-    //删除的按钮函数
-    Ext.spring.dataConfiguration.umanage.accountManage.dept_del = function () {
-        var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
-        globalObject.confirmTip('请确认，是否执行删除操作？', function(btn) {
-            if (btn == 'yes') {
-                var id = record.get('dept_id');
-                Ext.Ajax.request({
-                    url : appBaseUri + '/dnw/dept/deleteDept',
-                    params : {
-                        ids : id
-                    },
-                    success : function(response) {
-                        if (response.responseText != '') {
-                            var res = Ext.JSON.decode(response.responseText);
-                            if (res.success) {
-                                globalObject.msgTip('操作成功！');
-                                //Ext.roof.dataConfiguration.umanage.DeptManage.linemanage_tree_refresh();
-                                Ext.getCmp('dept_grid').getStore().reload();
-                            } else {
-                                globalObject.errTip('操作失败！' + res.msg);
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    }
+    // Ext.spring.dataConfiguration.umanage.accountManage.dept_edit = function () {
+    //     var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
+    //     //以window的名字.DeptManagementWindow
+    //     var win = new App.DeptManagementWindow({
+    //         hidden : true
+    //     });
+    //     var form = win.down('form').getForm();
+    //     form.loadRecord(record);
+    //     form.findField("cmd").setValue("edit");
+    //     if (companyId!='00') {
+    //         form.findField('company_name').disable(true);
+    //     }
+    //     win.show();
+    // }
+    //
+    // //删除的按钮函数
+    // Ext.spring.dataConfiguration.umanage.accountManage.dept_del = function () {
+    //     var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
+    //     globalObject.confirmTip('请确认，是否执行删除操作？', function(btn) {
+    //         if (btn == 'yes') {
+    //             var id = record.get('dept_id');
+    //             Ext.Ajax.request({
+    //                 url : appBaseUri + '/dnw/dept/deleteDept',
+    //                 params : {
+    //                     ids : id
+    //                 },
+    //                 success : function(response) {
+    //                     if (response.responseText != '') {
+    //                         var res = Ext.JSON.decode(response.responseText);
+    //                         if (res.success) {
+    //                             globalObject.msgTip('操作成功！');
+    //                             //Ext.roof.dataConfiguration.umanage.DeptManage.linemanage_tree_refresh();
+    //                             Ext.getCmp('dept_grid').getStore().reload();
+    //                         } else {
+    //                             globalObject.errTip('操作失败！' + res.msg);
+    //                         }
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
 });

@@ -16,14 +16,6 @@
 	    <script type="text/javascript" src="${contextPath}/static/ext/examples/shared/examples.js"></script>
 	    <script type="text/javascript">
 			console.log('888888888')
-	  		<%--var userName = '${SESSION_SYS_USER.userName}';--%>
-	  		<%--var globalRoleId = '${SESSION_SYS_USER.role}';--%>
-            <%--var userId = '${SESSION_SYS_USER.user_id}';--%>
-            <%--var userName = '${SESSION_SYS_USER.user_account}';--%>
-            <%--var user_name = '${SESSION_SYS_USER.user_name}';--%>
-            <%--var companyId = '${SESSION_SYS_USER.company_id}';--%>
-            <%--var companyName = '${SESSION_SYS_USER.company_name}';--%>
-            <%--var deptId = '${SESSION_SYS_USER.dept_id}';--%>
             var role_ids = '${SESSION_ROLE_IDS}';
             console.log(role_ids,'1111')
 			<%--var lastLoginTime = '${SESSION_SYS_USER.lastLoginTime}';--%>
@@ -31,7 +23,8 @@
 	    	var appName = '配网整定计算';
 	        Ext.Loader.setPath('Ext.app', '${contextPath}/static/ext/examples/portal/classes');
 	        Ext.Loader.setPath('Ext.ux', '${contextPath}/static/ext/examples/ux');
-	        Ext.Loader.setPath('Forestry.app', '${contextPath}/static/ext/examples/portal');
+	        Ext.Loader.setPath('Forestry.app', '${contextPath}/static/ext/examples/portal');//此处注意，加载的是..examples/portal路径下所有开头定义为
+            //'Forestry.app'的组件（如：Ext.define('Forestry.app.manage.AccountManage',{}），若不为'Forestry.app'，则未加载，在使用时会报错
 	    </script>
 	    <script type="text/javascript" src="${contextPath}/static/ext/examples/portal/portal.js"></script>
 		<%--<script type="text/javascript" src="${contextPath}/static/ext/examples/portal/UUID.js"></script>--%>
