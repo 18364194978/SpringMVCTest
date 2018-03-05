@@ -161,4 +161,4 @@ INSERT INTO t_role_menu (role_menu_id, role_id,menu_id) VALUES ('212', '01111','
 INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,sort_order)
  VALUES ('10','false','false','账户管理','1000');
 INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,parent_id,sort_order,url)
-VALUES ('101','false','true','地区管理','10','1001','umanage.accountManage');
+VALUES ('101','false','true','地区管理','10','1001','manage.AccountManage');

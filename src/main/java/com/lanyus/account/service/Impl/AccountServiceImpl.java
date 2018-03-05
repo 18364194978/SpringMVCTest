@@ -35,5 +35,13 @@ public class AccountServiceImpl implements  AccountService{
 //        }
         return accountMapper.getRegionCount(param);
     }
+    @Override
+    public void addRegion(Region region){
+
+    }
+    @Override
+    public void editRegion(Region region){
+
+    }
 
 }

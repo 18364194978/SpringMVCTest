@@ -37,17 +37,17 @@
                     },
                     complete: function (xmlRequest) {
                         console.log(xmlRequest, '1');
-                        <%--var returninfo = eval("(" + xmlRequest.responseText + ")");--%>
-                        <%--if (returninfo.result == 1) {--%>
-                        <%--setCookie();--%>
-                        <%--document.location.href = "${contextPath}/dnw/user/home";--%>
-                        <%--} else if (returninfo.result == -1) {--%>
-                        <%--alert("用户名有误或已被禁用");--%>
-                        <%--} else if (returninfo.result == -2) {--%>
-                        <%--alert("密码错误");--%>
-                        <%--} else {--%>
-                        <%--alert("服务器错误");--%>
-                        <%--}--%>
+                        var returninfo = eval("(" + xmlRequest.responseText + ")");
+                        if (returninfo.result == 1) {
+                        setCookie();
+                        document.location.href = "${contextPath}/spring/user/home";
+                        } else if (returninfo.result == -1) {
+                        alert("用户名有误或已被禁用");
+                        } else if (returninfo.result == -2) {
+                        alert("密码错误");
+                        } else {
+                        alert("服务器错误");
+                        }
                     }
                 });
             }
@@ -80,7 +80,6 @@
 	<h1>SpringMVC测试系统</h1>
 	<div class="main-agileinfo">
 		<h2>用户登录</h2>
-		<form action="#" method="post">
 			<input type="text" name="name" class="name" id="userName" placeholder="Usename" required="" onkeydown='if(event.keyCode==13){login();}' onblur="javascript:getCookie();">
 			<input type="password" name="password" id="password" class="password" placeholder="Password" required="" onkeydown='if(event.keyCode==13){login();}'>
 			<ul>
@@ -93,7 +92,6 @@
 </a><br>
 			<div class="clear"></div>
 			<input type="submit" value="Login" onclick="javascript:login();">
-		</form>
 	</div>
 	<div class="footer-w3l">
 		<p class="agile"> &copy; 2017 xxxxxxxxxxxxx</p>

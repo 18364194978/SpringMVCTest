@@ -3,6 +3,7 @@
 <mapper namespace="com.lanyus.account.dao.AccountMapper" >
     <resultMap id="RegionMap" type="com.lanyus.account.entity.Region" ></resultMap>
     <resultMap id="Map" type="java.util.Map" ></resultMap>
+    <resultMap id="Int" type="java.lang.Integer" ></resultMap>
     <select id="getRegionList" resultMap="RegionMap" parameterType="Map" >
         SELECT * FROM t_region
         <where>
@@ -13,7 +14,7 @@
         </where>
         ORDER  BY t_region.region_id DESC limit #{start},#{limit}
     </select>
-    <select id="getRegionCount" resultMap="RegionMap" parameterType="Map" >
+    <select id="getRegionCount" resultMap="Int" parameterType="Map" >
         SELECT count(*) FROM t_region
         <where>
             1=1

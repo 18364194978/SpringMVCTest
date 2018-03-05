@@ -23,4 +23,17 @@ public interface AccountService {
      * @return
      */
     List<Region> finRegionList(Map<String,Object> param);
+
+    /**
+     * 根据条件添加地区信息
+     * @param region
+     * @return
+     */
+    void addRegion(Region region);
+    /**
+     * 根据条件修改地区信息
+     * @param region
+     * @return
+     */
+    void editRegion(Region region);
 }

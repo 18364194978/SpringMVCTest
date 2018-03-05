@@ -3,12 +3,14 @@ package com.lanyus.authority.controller;
 import core.CommenBaseController;
 import com.lanyus.authority.service.AuthorityService;
 import com.lanyus.util.Tools;
+import core.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,13 @@ public class AuthorityController extends CommenBaseController{
             resultList = authorityService.getMenuList(role_ids);
         }
         writeJSON(response, resultList);
+    }
+    @RequestMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        request.getSession().removeAttribute(Constant.SESSION_SYS_USER);
+        String contextPath = request.getContextPath();
+        response.sendRedirect(contextPath + "/index.jsp");
     }
 
 }
