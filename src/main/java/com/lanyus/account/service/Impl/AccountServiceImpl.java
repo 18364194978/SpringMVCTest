@@ -27,6 +27,10 @@ public class AccountServiceImpl implements  AccountService{
         return accountMapper.getRegionList(param);
     }
     @Override
+    public List<Region> checkRegionList(Map<String,Object> param){
+        return accountMapper.checkRegionList(param);
+    }
+    @Override
     public int findRegionCount(Map<String,Object>param){
         //        if(!"1".equals(param.get("user_id"))){
 //            UUser uuser=usersMapper.select_userById(param);
@@ -36,12 +40,8 @@ public class AccountServiceImpl implements  AccountService{
         return accountMapper.getRegionCount(param);
     }
     @Override
-    public void addRegion(Region region){
-
-    }
-    @Override
-    public void editRegion(Region region){
-
+    public void addRegion(Map<String,Object> region){
+        accountMapper.addRegion(region);
     }
 
 }

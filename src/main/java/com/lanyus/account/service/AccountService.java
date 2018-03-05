@@ -25,15 +25,22 @@ public interface AccountService {
     List<Region> finRegionList(Map<String,Object> param);
 
     /**
+            * 根据条件查询地区信息的list
+     * @param param
+     * @return
+             */
+    List<Region> checkRegionList(Map<String,Object> param);
+
+    /**
      * 根据条件添加地区信息
      * @param region
      * @return
      */
-    void addRegion(Region region);
+    void addRegion(Map<String,Object> region);
     /**
      * 根据条件修改地区信息
      * @param region
      * @return
      */
-    void editRegion(Region region);
+//    void editRegion(Region region);
 }

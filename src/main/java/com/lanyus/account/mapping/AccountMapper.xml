@@ -14,6 +14,15 @@
         </where>
         ORDER  BY t_region.region_id DESC limit #{start},#{limit}
     </select>
+    <select id="checkRegionList" resultMap="RegionMap" parameterType="Map" >
+        SELECT * FROM t_region
+        <where>
+            1=1
+            <if test="region_name!=null and region_name!=''">
+                AND region_name = #{region_name}
+            </if>
+        </where>
+    </select>
     <select id="getRegionCount" resultMap="Int" parameterType="Map" >
         SELECT count(*) FROM t_region
         <where>
@@ -23,4 +32,14 @@
             </if>
         </where>
     </select>
+    <insert id="addRegion" parameterType="Map">
+        INSERT INTO
+        t_region(
+        region_id,
+        region_name
+        )VALUES(
+        #{region_id},
+        #{region_name}
+        )
+    </insert>
 </mapper>

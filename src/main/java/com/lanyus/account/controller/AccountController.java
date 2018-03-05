@@ -67,24 +67,27 @@ public class AccountController extends CommenBaseController {
      * @param response
      * @throws IOException
      */
-    @RequestMapping(value = "/saveUpdateDept")
-    @ResponseBody
-    public void saveUpdateDept(Region region, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/saveCreateRegion")
+    public void saveUpdateDept( HttpServletRequest request, HttpServletResponse response) throws IOException {
         ExtJSBaseParameter parameter = new ExtJSBaseParameter();
         /*首先查看是否该单位下有无该部门是否已存在*/
         Map<String, Object> param = new HashMap<>();
-        param.put("region_name", request.getParameter("region_name"));
+        String regionname = request.getParameter("region_name");
+        param.put("region_name", regionname);
         String isCreate = request.getParameter("isCreate");
-        List<Region> exist = accountService.finRegionList(param);
+        List<Region> exist = accountService.checkRegionList(param);
         if (exist.size() > 0) {
             parameter.setSuccess(false);
             parameter.setMessage("该地区已存在，请确认后重新输入");
             writeJSON(response, parameter);
             return;
         }
-        region.setRegion_name(request.getParameter("region_name"));
-        region.setRegion_id(IDUtils.uuid());
-        accountService.addRegion(region);
+        Map<String, Object> param2 = new HashMap<>();
+        String region_name = request.getParameter("region_name");
+        String uuid = IDUtils.uuid();
+        param2.put("region_name",region_name);
+        param2.put("region_id",uuid);
+        accountService.addRegion(param2);
         parameter.setSuccess(true);
         writeJSON(response, parameter);
     }
