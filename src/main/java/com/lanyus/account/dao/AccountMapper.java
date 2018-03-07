@@ -39,4 +39,10 @@ public interface AccountMapper {
      * @return
      */
     void editRegion(Map<String,Object> param);
+    /**
+     * 删除地区信息
+     * @param param
+     * @return
+     */
+    void delRegion(Map<String,Object> param);
 }

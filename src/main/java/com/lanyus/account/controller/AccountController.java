@@ -61,7 +61,7 @@ public class AccountController extends CommenBaseController {
     }
 
     /**
-     * 新增/编辑部门
+     * 新增/编辑地区信息
      *
      * @param request
      * @param response
@@ -93,5 +93,20 @@ public class AccountController extends CommenBaseController {
         }
         parameter.setSuccess(true);
         writeJSON(response, parameter);
+    }
+
+    /**
+     * 删除地区信息
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/delRegion")
+    public void delRegion(HttpServletRequest request,HttpServletResponse response)throws IOException{
+        ExtJSBaseParameter parameter = new ExtJSBaseParameter();
+        Map<String, Object> param = new HashMap<>();
+        String region_id = request.getParameter("region_id");
+        param.put("region_id",region_id);
+        accountService.delRegion(param);
     }
 }

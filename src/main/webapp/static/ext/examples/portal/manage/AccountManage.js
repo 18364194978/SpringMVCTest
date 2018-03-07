@@ -141,9 +141,9 @@ Ext.onReady(function () {
             }, {
                 text: '操作项', dataIndex: 'oper', sortable: false, flex: 0.20,
                 renderer: function (value, cellmeta, record, rowIndex, columnIndex, store) {
-                    return "<span class='tip_info' onclick='Ext.spring.dataConfiguration.manage.AccountManage.regon_edit()'>修改</span>"
+                    return "<span class='tip_info' onclick='Ext.spring.dataConfiguration.manage.AccountManage.region_edit()'>修改</span>"
                         + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "<span class='tip_danger' " +
-                        "onclick=''>删除</span>";
+                        "onclick='Ext.spring.dataConfiguration.manage.AccountManage.region_del()'>删除</span>";
                 }
             }];
             var ttoolbar = Ext.create('Ext.toolbar.Toolbar', {
@@ -203,7 +203,7 @@ Ext.onReady(function () {
     });
 
     // 修改的按钮函数
-    Ext.spring.dataConfiguration.manage.AccountManage.regon_edit = function () {
+    Ext.spring.dataConfiguration.manage.AccountManage.region_edit = function () {
         var record = Ext.getCmp('region_grid').getSelectionModel().getLastSelected();
         //以window的名字.DeptManagementWindow
         var win = new App.RegionManagementWindow({
@@ -217,30 +217,29 @@ Ext.onReady(function () {
     }
     //
     // //删除的按钮函数
-    // Ext.spring.dataConfiguration.umanage.accountManage.dept_del = function () {
-    //     var record = Ext.getCmp('dept_grid').getSelectionModel().getLastSelected();
-    //     globalObject.confirmTip('请确认，是否执行删除操作？', function(btn) {
-    //         if (btn == 'yes') {
-    //             var id = record.get('dept_id');
-    //             Ext.Ajax.request({
-    //                 url : appBaseUri + '/dnw/dept/deleteDept',
-    //                 params : {
-    //                     ids : id
-    //                 },
-    //                 success : function(response) {
-    //                     if (response.responseText != '') {
-    //                         var res = Ext.JSON.decode(response.responseText);
-    //                         if (res.success) {
-    //                             globalObject.msgTip('操作成功！');
-    //                             //Ext.roof.dataConfiguration.umanage.DeptManage.linemanage_tree_refresh();
-    //                             Ext.getCmp('dept_grid').getStore().reload();
-    //                         } else {
-    //                             globalObject.errTip('操作失败！' + res.msg);
-    //                         }
-    //                     }
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
+    Ext.spring.dataConfiguration.manage.AccountManage.region_del = function () {
+        var record = Ext.getCmp('region_grid').getSelectionModel().getLastSelected();
+        globalObject.confirmTip('请确认，是否执行删除操作？', function(btn) {
+            if (btn == 'yes') {
+                var id = record.get('region_id');
+                Ext.Ajax.request({
+                    url : appBaseUri + '/spring/account/delRegion',
+                    params : {
+                        region_id : id
+                    },
+                    success : function(response) {
+                        if (response.responseText != '') {
+                            var res = Ext.JSON.decode(response.responseText);
+                            if (res.success) {
+                                globalObject.msgTip('操作成功！');
+                                Ext.getCmp('region_grid').getStore().reload();
+                            } else {
+                                globalObject.errTip('操作失败！' + res.msg);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
 });

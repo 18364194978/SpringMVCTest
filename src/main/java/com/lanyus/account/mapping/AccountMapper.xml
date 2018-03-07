@@ -51,4 +51,7 @@
         WHERE
         region_id=#{region_id}
     </update>
+    <delete id="delRegion" parameterType="Map">
+        DELETE FROM t_region WHERE region_id = #{region_id}
+    </delete>
 </mapper>

@@ -43,4 +43,10 @@ public interface AccountService {
      * @return
      */
     void editRegion(Map<String,Object> region);
+    /**
+     * 根据条件删除地区信息
+     * @param region
+     * @return
+     */
+    void delRegion(Map<String,Object> region);
 }
