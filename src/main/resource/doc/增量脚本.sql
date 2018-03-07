@@ -162,3 +162,11 @@ INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,sort_order)
  VALUES ('10','false','false','账户管理','1000');
 INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,parent_id,sort_order,url)
 VALUES ('101','false','true','地区管理','10','1001','manage.AccountManage');
+/*
+  添加人：xie
+  添加时间：2018-03-07
+  说明：插入公司管理菜单
+*/
+INSERT INTO t_menu (menu_id,expanded,leaf,menu_name,parent_id,sort_order,url)
+VALUES ('102','false','true','公司管理','10','1002','manage.CompanyManage');
+INSERT INTO t_role_menu (role_menu_id, role_id,menu_id) VALUES ('213', '01111','102');

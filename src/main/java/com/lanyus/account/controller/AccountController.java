@@ -73,7 +73,9 @@ public class AccountController extends CommenBaseController {
         /*首先查看是否该单位下有无该部门是否已存在*/
         Map<String, Object> param = new HashMap<>();
         String regionname = request.getParameter("region_name");
+        String regionid = request.getParameter("region_id");
         param.put("region_name", regionname);
+        param.put("region_id",regionid);
         String isCreate = request.getParameter("isCreate");
         List<Region> exist = accountService.checkRegionList(param);
         if (exist.size() > 0) {
@@ -82,12 +84,13 @@ public class AccountController extends CommenBaseController {
             writeJSON(response, parameter);
             return;
         }
-        Map<String, Object> param2 = new HashMap<>();
-        String region_name = request.getParameter("region_name");
-        String uuid = IDUtils.uuid();
-        param2.put("region_name",region_name);
-        param2.put("region_id",uuid);
-        accountService.addRegion(param2);
+        if (isCreate.equals("true")) {
+            String uuid = IDUtils.uuid();
+            param.put("region_id", uuid);
+            accountService.addRegion(param);
+        }else {
+            accountService.editRegion(param);
+        }
         parameter.setSuccess(true);
         writeJSON(response, parameter);
     }

@@ -42,5 +42,5 @@ public interface AccountService {
      * @param region
      * @return
      */
-//    void editRegion(Region region);
+    void editRegion(Map<String,Object> region);
 }

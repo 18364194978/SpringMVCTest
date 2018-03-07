@@ -21,6 +21,9 @@
             <if test="region_name!=null and region_name!=''">
                 AND region_name = #{region_name}
             </if>
+            <if test="region_id!=null and region_id!=''">
+                AND region_id = #{region_id}
+            </if>
         </where>
     </select>
     <select id="getRegionCount" resultMap="Int" parameterType="Map" >
@@ -42,4 +45,10 @@
         #{region_name}
         )
     </insert>
+    <update id="editRegion" parameterType="Map">
+        UPDATE t_region SET
+        region_name=#{region_name}
+        WHERE
+        region_id=#{region_id}
+    </update>
 </mapper>

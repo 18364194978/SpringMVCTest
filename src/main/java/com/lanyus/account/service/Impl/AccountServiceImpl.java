@@ -43,5 +43,9 @@ public class AccountServiceImpl implements  AccountService{
     public void addRegion(Map<String,Object> region){
         accountMapper.addRegion(region);
     }
+    @Override
+    public void editRegion(Map<String,Object> region){
+        accountMapper.editRegion(region);
+    }
 
 }
