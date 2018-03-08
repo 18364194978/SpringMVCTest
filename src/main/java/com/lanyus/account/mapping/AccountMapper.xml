@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lanyus.account.dao.AccountMapper" >
     <resultMap id="RegionMap" type="com.lanyus.account.entity.Region" ></resultMap>
+    <resultMap id="CompanyMap" type="com.lanyus.account.entity.Company"></resultMap>
     <resultMap id="Map" type="java.util.Map" ></resultMap>
     <resultMap id="Int" type="java.lang.Integer" ></resultMap>
     <select id="getRegionList" resultMap="RegionMap" parameterType="Map" >
@@ -54,4 +55,25 @@
     <delete id="delRegion" parameterType="Map">
         DELETE FROM t_region WHERE region_id = #{region_id}
     </delete>
+    <select id="getCompanyList" resultMap="CompanyMap" parameterType="Map" >
+        SELECT c.company_id,c.company_name,c.region_id,
+        (SELECT r.region_name FROM t_region r WHERE c.region_id = r.region_id) AS region_name
+        FROM t_company c
+        <where>
+            1=1
+            <if test="company_name!=null and company_name!=''">
+                AND company_name like CONCAT('%',#{company_name},'%')
+            </if>
+        </where>
+        ORDER  BY t_company.company_id DESC limit #{start},#{limit}
+    </select>
+    <select id="getCompanyCount" resultMap="Int" parameterType="Map" >
+        SELECT count(*) FROM t_company
+        <where>
+            1=1
+            <if test="region_name!=null and region_name!=''">
+                AND company_name like CONCAT('%',#{company_name},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

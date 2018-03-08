@@ -109,4 +109,31 @@ public class AccountController extends CommenBaseController {
         param.put("region_id",region_id);
         accountService.delRegion(param);
     }
+    /**
+     * 公司列表读取
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("/getCompanyList")
+    @ResponseBody
+    public void getCompanyList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer firstResult = Integer.valueOf(request.getParameter("start"));
+        Integer maxResults = Integer.valueOf(request.getParameter("limit"));
+        String region_name = request.getParameter("company_name");
+        List<Company> resultList = new ArrayList();
+        Map<String, Object> param = new HashMap<String, Object>();
+        if (Tools.isEmpty(region_name)) {
+            param.put("company_name", region_name);
+        }
+        int resultCount = accountService.getCompanyCount(param);
+        param.put("start", firstResult);
+        param.put("limit", maxResults);
+        resultList = accountService.getCompanyList(param);
+        ListView<Company> listView = new ListView<Company>();
+        listView.setData(resultList);
+        listView.setTotalRecord(resultCount);
+        writeJSON(response, listView);
+    }
 }

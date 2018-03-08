@@ -1,6 +1,7 @@
 package com.lanyus.account.dao;
 
 import com.lanyus.account.entity.Region;
+import com.lanyus.account.entity.Company;
 
 import java.util.List;
 import java.util.Map;
@@ -45,4 +46,16 @@ public interface AccountMapper {
      * @return
      */
     void delRegion(Map<String,Object> param);
+    /**
+     * 根据获取公司列表
+     * @param param
+     * @return
+     */
+    List<Company> getCompanyList(Map<String,Object> param);
+    /**
+     * 根据获取公司数量
+     * @param param
+     * @return
+     */
+    int getCompanyCount(Map<String,Object> param);
 }

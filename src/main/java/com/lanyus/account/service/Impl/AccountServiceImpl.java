@@ -3,6 +3,7 @@ package com.lanyus.account.service.Impl;
 import com.lanyus.account.service.AccountService;
 import com.lanyus.account.dao.AccountMapper;
 import com.lanyus.account.entity.Region;
+import com.lanyus.account.entity.Company;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,6 +51,14 @@ public class AccountServiceImpl implements  AccountService{
     @Override
     public void delRegion(Map<String,Object> region){
         accountMapper.delRegion(region);
+    }
+    @Override
+    public List<Company> getCompanyList(Map<String,Object> param){
+        return accountMapper.getCompanyList(param);
+    }
+    @Override
+    public int getCompanyCount(Map<String,Object>param){
+        return accountMapper.getCompanyCount(param);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.lanyus.account.service;
 
+import com.lanyus.account.entity.Company;
 import com.lanyus.account.entity.Region;
 
 import java.util.List;
@@ -49,4 +50,16 @@ public interface AccountService {
      * @return
      */
     void delRegion(Map<String,Object> region);
+    /**
+     * 根据条件查询公司信息的数量
+     * @param param
+     * @return
+     */
+    int getCompanyCount(Map<String,Object> param);
+    /**
+     * 根据条件查询公司信息的list
+     * @param param
+     * @return
+     */
+    List<Company> getCompanyList(Map<String,Object> param);
 }

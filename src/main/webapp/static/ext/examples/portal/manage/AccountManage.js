@@ -119,7 +119,7 @@ Ext.onReady(function () {
                     }
                 },
                 sorters: [{
-                    property: 'dept_id',
+                    property: 'region_id',
                     direction: 'DESC'
                 }]
             });
@@ -215,7 +215,6 @@ Ext.onReady(function () {
         regionIsCreate = true;
         win.show();
     }
-    //
     // //删除的按钮函数
     Ext.spring.dataConfiguration.manage.AccountManage.region_del = function () {
         var record = Ext.getCmp('region_grid').getSelectionModel().getLastSelected();
