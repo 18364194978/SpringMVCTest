@@ -252,6 +252,7 @@ var globalObject = new Object();
 
 // 打开tab
 globalObject.openTab = function(tabId, tabTitle, tab, config) {
+    console.log(typeof (tab) == 'string','Forestry.app.' + tab)
     var _tab = mainTab.getComponent('tab' + tabId);
     if (!_tab) {
         mainTab.setLoading('Loading...');
@@ -262,8 +263,8 @@ globalObject.openTab = function(tabId, tabTitle, tab, config) {
             layout : 'fit',
             autoScroll : true,
             border : false,
-            // items : typeof (tab) == 'string' ? Ext.create('Ext.spring.' + tab, config) : tab
-            items : typeof (tab) == 'string' ? Ext.create('Forestry.app.manage.AccountManage', config) : tab
+            items : typeof (tab) == 'string' ? Ext.create('Forestry.app.' + tab, config) : tab
+            // items : typeof (tab) == 'string' ? Ext.create('Forestry.app.manage.AccountManage', config) : tab
         });
         mainTab.removeAll();//2017-09-11修改为tab标签单开只显示一个
         mainTab.add(_tab);

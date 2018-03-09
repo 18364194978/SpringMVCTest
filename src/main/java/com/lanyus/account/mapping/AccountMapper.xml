@@ -65,7 +65,7 @@
                 AND company_name like CONCAT('%',#{company_name},'%')
             </if>
         </where>
-        ORDER  BY t_company.company_id DESC limit #{start},#{limit}
+        ORDER  BY c.company_id DESC limit #{start},#{limit}
     </select>
     <select id="getCompanyCount" resultMap="Int" parameterType="Map" >
         SELECT count(*) FROM t_company

@@ -4,6 +4,94 @@ Ext.namespace('Ext.spring.dataConfiguration.manage.CompanyManage');//自定一�
  */
 Ext.onReady(function () {
     Ext.tip.QuickTipManager.init();
+    Ext.define('App.CompanyManagementWindow', {
+        extend: 'Ext.window.Window',
+        constructor: function (config) {
+            config = config || {};
+            Ext.apply(config, {
+                title: '公司信息',
+                width: 400,
+                height: 150,
+                bodyPadding: '10 5',
+                modal: true,
+                layout: 'fit',
+                items: [{
+                    xtype: 'form',
+                    fieldDefaults: {
+                        labelAlign: 'left',
+                        labelWidth: 50,
+                        anchor: '100%'
+                    },
+                    items: [{
+                        xtype: 'textfield',
+                        name: 'item_type',
+                        id: 'item_type',
+                        hidden:true
+                    },{
+                        xtype: 'textfield',
+                        name: 'company_id',
+                        id: 'company_id',
+                        hidden:true
+                    }, {
+                        xtype: 'textfield',
+                        name: 'company_name',
+                        fieldLabel: '公司',
+                        emptyText: '请输入公司',
+                        allowBlank: false,
+                        maxLength: 30
+                    }],
+                    buttons: ['->', {
+                        text: '保存',
+                        iconCls: 'icon-save',
+                        width: 80,
+                        handler: function (btn, eventObj) {
+                            var window = btn.up('window');
+                            regionIsCreate = true;
+                            var form = window.down('form').getForm();
+                            if (form.isValid()) {
+                                window.getEl().mask('数据保存中，请稍候...');
+                                var vals = form.getValues();
+                                Ext.Ajax.request({
+                                    url: appBaseUri + '/spring/account/saveCreateRegion',
+                                    params: {
+                                        region_name: vals['region_name'],
+                                        region_id: vals['region_id'],
+                                        isCreate: regionIsCreate
+                                    },
+                                    method: 'POST',
+                                    success: function (response) {
+                                        window.getEl().unmask();
+                                        if (response.responseText != '') {
+                                            var res = Ext.JSON.decode(response.responseText);
+                                            if (res.success) {
+                                                window.close();
+                                                globalObject.msgTip('操作成功！');
+                                                Ext.getCmp('region_grid').getStore().reload();
+                                            } else {
+                                                globalObject.msgTip(res.message);
+                                            }
+                                        }
+                                    },
+                                    failure: function (response) {
+                                        window.getEl().unmask();
+                                        globalObject.errTip('操作失败！');
+                                    }
+                                });
+                            }
+                        }
+                    }, {
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        width: 80,
+                        handler: function () {
+                            this.up('window').close();
+                        }
+                    }]
+                }]
+            });
+            App.RegionManagementWindow.superclass.constructor.call(this, config);
+        }
+    });
     Ext.define('Forestry.app.manage.CompanyManage',{
         extend: 'Ext.grid.Panel',
         region: 'center',
@@ -59,9 +147,9 @@ Ext.onReady(function () {
             }, {
                 text: '操作项', dataIndex: 'oper', sortable: false, flex: 0.20,
                 renderer: function (value, cellmeta, record, rowIndex, columnIndex, store) {
-                    return "<span class='tip_info' onclick='Ext.spring.dataConfiguration.manage.AccountManage.region_edit()'>修改</span>"
+                    return "<span class='tip_info' onclick='Ext.spring.dataConfiguration.manage.CompanyManage.region_edit()'>修改</span>"
                         + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "<span class='tip_danger' " +
-                        "onclick='Ext.spring.dataConfiguration.manage.AccountManage.region_del()'>删除</span>";
+                        "onclick='Ext.spring.dataConfiguration.manage.CompanyManage.region_del()'>删除</span>";
                 }
             }];
             var ttoolbar = Ext.create('Ext.toolbar.Toolbar', {
@@ -89,12 +177,12 @@ Ext.onReady(function () {
                 }, '->',
                     {
                         xtype: 'button',
-                        text: '新增地区',
+                        text: '新增公司',
                         iconCls: 'icon-add',
                         width: '25%',
                         maxWidth: 100,
                         handler: function (btn, eventObj) {
-                            var win = new App.RegionManagementWindow({
+                            var win = new App.CompanyManagementWindow({
                                 hidden: true
                             });
                             var form = win.down('form').getForm();
@@ -118,5 +206,44 @@ Ext.onReady(function () {
             store.loadPage(1);
             this.callParent(arguments);
         }
-    })
+    });
+    // 修改的按钮函数
+    Ext.spring.dataConfiguration.manage.CompanyManage.region_edit = function () {
+        var record = Ext.getCmp('region_grid').getSelectionModel().getLastSelected();
+        //以window的名字.DeptManagementWindow
+        var win = new App.RegionManagementWindow({
+            hidden: true
+        });
+        var form = win.down('form').getForm();
+        form.loadRecord(record);
+        form.findField("item_type").setValue("edit");
+        regionIsCreate = true;
+        win.show();
+    }
+    // //删除的按钮函数
+    Ext.spring.dataConfiguration.manage.CompanyManage.region_del = function () {
+        var record = Ext.getCmp('region_grid').getSelectionModel().getLastSelected();
+        globalObject.confirmTip('请确认，是否执行删除操作？', function(btn) {
+            if (btn == 'yes') {
+                var id = record.get('region_id');
+                Ext.Ajax.request({
+                    url : appBaseUri + '/spring/account/delRegion',
+                    params : {
+                        region_id : id
+                    },
+                    success : function(response) {
+                        if (response.responseText != '') {
+                            var res = Ext.JSON.decode(response.responseText);
+                            if (res.success) {
+                                globalObject.msgTip('操作成功！');
+                                Ext.getCmp('region_grid').getStore().reload();
+                            } else {
+                                globalObject.errTip('操作失败！' + res.msg);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
 });
